@@ -1,0 +1,64 @@
+body {
+    font-family:Arial;
+    background:#3277a8;
+}
+
+#band-forms {
+    display:flex;
+    justify-content: space-between;
+}
+
+.band-form {
+    background:#add6f0;
+    margin:auto 10px;
+    padding:10px;
+    border-radius:3px;
+    flex-basis:45%;
+}
+
+.band-form label {
+    display:block;
+}
+
+.band-form input, .band-form textarea {
+    width:300px;
+}
+
+.band {
+    background:#c7c5c9;
+    padding:10px;
+    margin:10px;
+    border-radius:3px;
+}
+
+#btn-show-add-band {
+    font-size: 15px;
+    
+}
+
+.error {
+    background:lightcoral;
+    color:darkRed;
+}
+
+.success {
+    background:lightgreen;
+    color:darkGreen;
+}
+
+.hidden {
+    display:none;
+}
+
+h1 {
+    text-align:center;
+}
+
+a {
+    color:black;
+}
+
+.band-heading {
+    display:flex;
+    justify-content:space-between;
+}
