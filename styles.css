@@ -4,7 +4,7 @@ body {
 }
 
 #band-forms {
-    display:flex;
+    /*display:flex;*/
     justify-content: space-between;
 }
 
