@@ -5,97 +5,58 @@ async function showBands(){
     let bands = await response.json();
     let bandsDiv = document.getElementById("bands");
     bandsDiv.innerHTML = "";
-    //console.log(bands);
+
     for(i in bands){
-        bandsDiv.appendChild(getBandElem(bands[i]));
+        bandsDiv.appendChild(createBandSection(bands[i]));
     }
 }
 
-function getBandElem(band){
+function createBandSection(band){
     let bandDiv = document.createElement("div");
     bandDiv.classList.add("band");
-    let bandContentDiv = document.createElement("div");
-    bandContentDiv.classList.add("band-content");
-    bandDiv.append(bandContentDiv);
+    let bandContent = document.createElement("div");
+    bandContent.classList.add("band-content");
+    bandDiv.append(bandContent);
 
-    //create a link to expand and contract the band details
-    let bandHeading = document.createElement("div");
-    let bandA = document.createElement("a");
-    let bandH3 = document.createElement("h3");
-    bandA.append(bandH3);
-    bandA.onclick = expandBand;
-    bandA.setAttribute("href", "#");
-    bandA.setAttribute("data-id", band._id);
-    bandH3.innerHTML = band.name;
-    bandHeading.append(bandA);
-    bandHeading.classList.add('band-heading');
-    bandHeading.append(getBandButtons(band));
-    bandContentDiv.append(bandHeading);
-    bandContentDiv.appendChild(getBandExpand(band));
+    //create an image to expand and contract the band details
+    let bandHeader1 = document.createElement("div");
+    let bandHeader2 = document.createElement("div");
+    let bandTitle = document.createElement("h3");
+    let bandLink = document.createElement("a");
+    let bandImg = document.createElement("img");
+    bandImg.src = "images/vinyl_record.jpg";
+    bandLink.append(bandImg);
+    bandLink.onclick = expandBand;
+    bandLink.setAttribute("href", "#");
+    bandLink.setAttribute("data-id", band._id);
+    bandTitle.innerHTML = band.name;
+    bandHeader1.append(bandTitle);
+    bandHeader2.append(bandLink);
+    bandHeader1.classList.add('band-heading1');
+    bandHeader2.classList.add('band-heading2');
+    bandHeader1.append(getButtons(band));
+    bandContent.append(bandHeader1);
+    bandContent.append(bandHeader2);
+    bandContent.appendChild(getBandExpand(band));
+
     return bandDiv;
 }
 
-function getBandButtons(band){
-    let buttonsDiv = document.createElement("div");
-    let editButton = document.createElement("button");
-    let deleteButton = document.createElement("button");
-    editButton.innerHTML = "Edit"
-    deleteButton.innerHTML = "Delete";
-    editButton.setAttribute("data-id", band._id);
-    deleteButton.setAttribute("data-id", band._id);
-    editButton.onclick = showEditBand;
-    deleteButton.onclick = deleteBand;
+function getButtons(band){
+    let btnDiv = document.createElement("div");
+    let editBtn = document.createElement("button");
+    let deleteBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit"
+    deleteBtn.innerHTML = "Delete";
+    editBtn.setAttribute("data-id", band._id);
+    deleteBtn.setAttribute("data-id", band._id);
+    editBtn.onclick = showEditBand;
+    deleteBtn.onclick = deleteBand;
 
-    buttonsDiv.append(editButton);
-    buttonsDiv.append(deleteButton);
+    btnDiv.append(editBtn);
+    btnDiv.append(deleteBtn);
 
-    return buttonsDiv;
-}
-
-async function showEditBand(){
-    let bandId = this.getAttribute("data-id");
-    document.getElementById("edit-band-id").textContent = bandId;
-
-    let response = await fetch(`api/bands/${bandId}`);
-
-    if(response.status != 200){
-        //showError("Error Displaying band");
-        return;
-    }
-
-    let band = await response.json();
-    document.getElementById('txt-edit-band-name').value = band.name;
-    document.getElementById("txt-edit-band-genre").value = band.genre;
-    document.getElementById("txt-edit-band-date").value = band.date;
-    document.getElementById("txt-edit-band-active").value = band.active;
-    if(band.members != null){
-        document.getElementById("txt-edit-band-members").value = band.members.join('\n');
-    }
-    if(band.songs != null){
-        document.getElementById("txt-edit-band-songs").value = band.songs.join('\n');
-    }
-}
-
-async function deleteBand(){
-    //clearError();
-    let bandId = this.getAttribute('data-id');
-
-    let response = await fetch(`/api/bands/${bandId}`, {
-        method: 'DELETE',
-        headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        }
-    });
-
-    if(response.status != 200){
-        //showError("Error deleting band");
-        console.log("Error deleting band");
-        return;
-    }
-    
-    let result = await response.json();
-    console.log("successful delete");
-    showBands();
+    return btnDiv;
 }
 
 function getBandExpand(band){
@@ -116,16 +77,17 @@ function getBandExpand(band){
     bandExpand.append(genreP);
     bandExpand.append(dateP);
     bandExpand.append(activeP);
-    bandExpand.append(getMembersElement(band));
-    bandExpand.append(getSongsElement(band));
+    bandExpand.append(getMembersElem(band));
+    bandExpand.append(getSongsElem(band));
+
     return bandExpand;
 }
 
-function getMembersElement(band){
+function getMembersElem(band){
     return getArrayInfo("Members", band.members);
 }
 
-function getSongsElement(band){
+function getSongsElem(band){
     return getArrayInfo("Songs", band.songs);
 }
 
@@ -155,12 +117,12 @@ function expandBand()
 
 
 async function addBand(){
-    const name = document.getElementById("txt-add-band-name").value;
-    const genre = document.getElementById("txt-add-band-genre").value;
-    const date = document.getElementById("txt-add-band-date").value;
-    const active = document.getElementById("txt-add-band-active").value;
-    const membersText = document.getElementById("txt-add-band-members").value;
-    const songsText = document.getElementById("txt-add-band-songs").value;
+    const name = document.getElementById("add-band-name").value;
+    const genre = document.getElementById("add-band-genre").value;
+    const date = document.getElementById("add-band-date").value;
+    const active = document.getElementById("add-band-active").value;
+    const membersText = document.getElementById("add-band-members").value;
+    const songsText = document.getElementById("add-band-songs").value;
     const members = membersText.split("\n");
     const songs = songsText.split("\n");
     const feedbackP = document.getElementById("add-feedback");
@@ -182,6 +144,9 @@ async function addBand(){
     if(response.status != 200){
         feedbackP.innerHTML = "Error Adding Band";
         feedbackP.classList.add("error");
+
+        await delay(3000);
+        feedbackP.remove();
         return;
     }
 
@@ -196,12 +161,12 @@ async function addBand(){
 
 async function editBand(){
     const id = document.getElementById("edit-band-id").textContent;
-    const name = document.getElementById("txt-edit-band-name").value;
-    const genre = document.getElementById("txt-edit-band-genre").value;
-    const date = document.getElementById("txt-edit-band-date").value;
-    const active = document.getElementById("txt-edit-band-active").value;
-    const membersText = document.getElementById("txt-edit-band-members").value;
-    const songsText = document.getElementById("txt-edit-band-songs").value;
+    const name = document.getElementById("edit-band-name").value;
+    const genre = document.getElementById("edit-band-genre").value;
+    const date = document.getElementById("edit-band-date").value;
+    const active = document.getElementById("edit-band-active").value;
+    const membersText = document.getElementById("edit-band-members").value;
+    const songsText = document.getElementById("edit-band-songs").value;
     const members = membersText.split("\n");
     const songs = songsText.split("\n");
     const feedbackP = document.getElementById("edit-feedback");
@@ -223,6 +188,9 @@ async function editBand(){
     if(response.status != 200){
         feedbackP.innerHTML = "Error Editing Band";
         feedbackP.classList.add("error");
+        
+        await delay(3000);
+        feedbackP.remove();
         return;
     }
 
@@ -235,6 +203,55 @@ async function editBand(){
     showBands();
 }
 
+async function showEditBand(){
+    let bandId = this.getAttribute("data-id");
+    document.getElementById("edit-band-id").textContent = bandId;
+
+    let response = await fetch(`api/bands/${bandId}`);
+
+    if(response.status != 200){
+        console.log("Error Displaying band");
+        return;
+    }
+
+    let band = await response.json();
+    document.getElementById('edit-band-name').value = band.name;
+    document.getElementById("edit-band-genre").value = band.genre;
+    document.getElementById("edit-band-date").value = band.date;
+    document.getElementById("edit-band-active").value = band.active;
+    if(band.members != null){
+        document.getElementById("edit-band-members").value = band.members.join('\n');
+    }
+    if(band.songs != null){
+        document.getElementById("edit-band-songs").value = band.songs.join('\n');
+    }
+}
+
+async function deleteBand(){
+    let bandId = this.getAttribute('data-id');
+
+    let response = await fetch(`/api/bands/${bandId}`, {
+        method: 'DELETE',
+        headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        }
+    });
+
+    if(response.status != 200){
+        console.log("Error deleting band");
+        return;
+    }
+    
+    let result = await response.json();
+    console.log("Successful delete");
+    showBands();
+}
+
+function formToggle() {
+    let hideElem = document.getElementById("band-forms");
+    hideElem.classList.toggle("hidden");
+}
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 window.onload = function(){
@@ -242,4 +259,7 @@ window.onload = function(){
     this.showBands();
 
     this.document.getElementById("btn-edit-band").onclick = editBand;
+
+    let toggleBtn = document.getElementById("btn-show-band-forms");
+    toggleBtn.onclick = this.formToggle;
 }

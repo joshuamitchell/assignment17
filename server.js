@@ -101,8 +101,7 @@ async function getBand(id,res){
 }
 
 app.put('/api/bands/:id',(req,res)=>{
-    //validate 
-    //if invalid return 400 - bad request
+    // validate data and return 400 error if invalid
     const result = validateBand(req.body);
 
     if(result.error){
@@ -114,7 +113,7 @@ app.put('/api/bands/:id',(req,res)=>{
 });
 
 async function updateBand(res, id, name, genre, date, active, members, songs) {
-    //fist param: to find, second update
+    // finds params and updates them
     const result = await Band.updateOne({_id:id},{
         $set:{
             name:name,
@@ -134,8 +133,6 @@ app.delete('/api/bands/:id',(req,res)=>{
 });
 
 async function removeBand(res, id) {
-    //can also use delete many
-    //const result = await Course.deleteOne({_id:id});
     const band = await Band.findByIdAndRemove(id);
     res.send(band);
 }

@@ -6,69 +6,80 @@
         <link rel="shortcut icon" href="">
     </head>
     <body>
-        <h1>Band List</h1>
-        <button id ="btn-show-add-band">+</button>
+        <div class="title-container">
+            <h1>Band Collection</h1>
+            <button id ="btn-show-band-forms">Expand the Collection</button>
+        </div>
 
-        <div id="bands"></div>
+        <div id="container">
+            <div id="band-container">
+                <div id="bands"></div>
+            </div>
+        </div>
 
         <div id='band-forms'>
             <div id="add-band-form" class="band-form">
-                <h2>Adding Bands</h2>
-                <p>
-                    <label for="txt-add-band-name">Name:</label>
-                    <input type="text" id="txt-add-band-name">
-                </p>
-                <p>
-                    <label for="txt-add-band-genre">Genre:</label>
-                    <input type="text" id="txt-add-band-genre">
-                </p>
-                <p>
-                    <label for="txt-add-band-date">Date Founded:</label>
-                    <input type="text" id="txt-add-band-date">
-                </p>
-                <p>
-                    <label for="txt-add-band-active">Is the Band Active?</label>
-                    <input type="text" id="txt-add-band-active">
-                </p>
-                <p>
-                    <label for="txt-add-band-members">Members:</label>
-                    <textarea rows="5" id="txt-add-band-members"></textarea>
-                </p>
-                <p>
-                    <label for="txt-add-band-songs">Songs:</label>
-                    <textarea rows="5" id="txt-add-band-songs"></textarea>
-                </p>
-                <button id="btn-add-band">Add Band</button>
+                <h2>Adding Band</h2>
+                <div id="input-container">
+                    <p>
+                        <label for="add-band-name">Name:</label>
+                        <input type="text" id="add-band-name">
+                    </p>
+                    <p>
+                        <label for="add-band-genre">Genre:</label>
+                        <input type="text" id="add-band-genre">
+                    </p>
+                    <p>
+                        <label for="add-band-date">Date Founded:</label>
+                        <input type="text" id="add-band-date">
+                    </p>
+                    <p>
+                        <label for="add-band-active">Is the Band Active?</label>
+                        <input type="text" id="add-band-active">
+                    </p>
+                    <p>
+                        <label for="add-band-members">Members:</label>
+                        <textarea rows="5" id="add-band-members"></textarea>
+                    </p>
+                    <p>
+                        <label for="add-band-songs">Songs:</label>
+                        <textarea rows="5" id="add-band-songs"></textarea>
+                    </p>
+                    <button id="btn-add-band">Add Band</button>
+                </div>
                 <p id="add-feedback" class="hidden"></p>
             </div>
+
             <div id="edit-band-form" class="band-form">
                 <h2>Edit Band</h2>
-                <span id="edit-band-id" class="hidden"></span>
-                <p>
-                    <label for="txt-edit-band-name">Name:</label>
-                    <input type="text" id="txt-edit-band-name">
-                </p>
-                <p>
-                    <label for="txt-edit-band-genre">Genre:</label>
-                    <input type="text" id="txt-edit-band-genre">
-                </p>
-                <p>
-                    <label for="txt-edit-band-date">Date Founded:</label>
-                    <input type="text" id="txt-edit-band-date">
-                </p>
-                <p>
-                    <label for="txt-edit-band-active">Is the Band Active?</label>
-                    <input type="text" id="txt-edit-band-active">
-                </p>
-                <p>
-                    <label for="txt-edit-band-members">Members:</label>
-                    <textarea rows="5" id="txt-edit-band-members"></textarea>
-                </p>
-                <p>
-                    <label for="txt-edit-band-songs">Songs:</label>
-                    <textarea rows="5" id="txt-edit-band-songs"></textarea>
-                </p>
-                <button id="btn-edit-band">Edit Band</button>
+                <div id="input-container">
+                    <span id="edit-band-id" class="hidden"></span>
+                    <p>
+                        <label for="edit-band-name">Name:</label>
+                        <input type="text" id="edit-band-name">
+                    </p>
+                    <p>
+                        <label for="edit-band-genre">Genre:</label>
+                        <input type="text" id="edit-band-genre">
+                    </p>
+                    <p>
+                        <label for="edit-band-date">Date Founded:</label>
+                        <input type="text" id="edit-band-date">
+                    </p>
+                    <p>
+                        <label for="edit-band-active">Is the Band Active?</label>
+                        <input type="text" id="edit-band-active">
+                    </p>
+                    <p>
+                        <label for="edit-band-members">Members:</label>
+                        <textarea rows="5" id="edit-band-members"></textarea>
+                    </p>
+                    <p>
+                        <label for="edit-band-songs">Songs:</label>
+                        <textarea rows="5" id="edit-band-songs"></textarea>
+                    </p>
+                    <button id="btn-edit-band">Edit Band</button>
+                </div>
                 <p id="edit-feedback" class="hidden"></p>
             </div>
         </div>

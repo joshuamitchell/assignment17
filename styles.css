@@ -1,64 +1,114 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-    font-family:Arial;
-    background:#3277a8;
+    background: #264653;
+}
+
+#container {
+    background: #2a9d8f;
+    width:70%;
+    margin: auto;
+    border:3px solid black;
+    border-radius: 3px;
 }
 
 #band-forms {
     /*display:flex;*/
+    border: 3px solid black;
+    background: #2a9d8f;
+    width: 60%;
+    padding:5px 5px;
+    margin: auto;
     justify-content: space-between;
 }
 
 .band-form {
-    background:#add6f0;
-    margin:auto 10px;
+    background: #F4A261;
+    margin: auto 10px;
     padding:10px;
     border-radius:3px;
     flex-basis:45%;
+    border: 3px solid white;
 }
 
 .band-form label {
-    display:block;
+    display: block;
 }
 
 .band-form input, .band-form textarea {
     width:300px;
 }
 
-.band {
-    background:#c7c5c9;
-    padding:10px;
-    margin:10px;
+.title-container {
+    background: #E76F51;
+    width:70%;
+    padding: 5px;
+    border:3px solid black;
     border-radius:3px;
+    margin:5px auto;
 }
 
-#btn-show-add-band {
-    font-size: 15px;
-    
+#btn-show-band-forms {
+    margin: auto 3px 3px;
+    width:99%;
+}
+
+.band {
+    background: #E9C46A;
+    padding:10px;
+    margin: auto;
+    border-radius:3px;
+    flex-basis:50%;
+    border:3px solid white;
+}
+
+#band-container {
+    display: flex;
+    justify-content: space-between;
+    border:5px;
+    padding:5px;
+    margin: auto;
+    width: 45%;
+}
+
+#input-container {
+    margin: auto;
+    width: 40%;
 }
 
 .error {
-    background:lightcoral;
-    color:darkRed;
+    background: lightcoral;
+    color: darkRed;
 }
 
 .success {
-    background:lightgreen;
-    color:darkGreen;
+    background: lightgreen;
+    color: darkGreen;
 }
 
 .hidden {
-    display:none;
+    display: none;
+    visibility: hidden;
 }
 
-h1 {
-    text-align:center;
+h1, h2, h3 {
+    text-align: center;
 }
 
-a {
-    color:black;
+h3 {
+    font-size: 24px;
 }
 
-.band-heading {
-    display:flex;
-    justify-content:space-between;
+.band-heading1, .band-heading2 {
+    display: flex;
+    justify-content: space-between;
 }
+
+/*@media (min-width: 900px) {
+    #band-forms {
+        display: flex;
+    }
+}
+*/
